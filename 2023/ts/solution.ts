@@ -19,6 +19,6 @@ export class Solution {
       this.input = inputParser(inputOverride);
     }
 
-    this.lines = this.input.split('\n');
+    this.lines = this.input.trim().split('\n');
   }
 }
