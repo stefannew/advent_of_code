@@ -10,6 +10,8 @@ fn main() {
     println!("Day One, Part Two: {d1p2}");
 
     let d2p1 = day_two::part_one();
+    let d2p2 = day_two::part_two();
     println!("Day Two, Part One: {d2p1}");
+    println!("Day Two, Part Two: {d2p2}");
 }
 
