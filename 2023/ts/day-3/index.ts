@@ -2,10 +2,15 @@ import { ISolution, Solution } from '../solution';
 import { isNumeric } from '../utils';
 
 type NumberDef = {
-  value: string;
+  value: number;
   start: number;
   end: number;
   row: number;
+}
+
+type GearPosition = {
+  row: number;
+  col: number;
 }
 
 export class DayThree extends Solution implements ISolution {
@@ -14,7 +19,7 @@ export class DayThree extends Solution implements ISolution {
     super(3);
     this.schematic = createSchematic(this.lines);
   }
-  partOne(): any {
+  partOne(): number {
     const numberDefinitions = gatherNumbers(this.schematic);
     const partNumbers = findPartNumbers(numberDefinitions, this.schematic);
     return partNumbers.reduce((acc, curr) => {
@@ -22,7 +27,17 @@ export class DayThree extends Solution implements ISolution {
     }, 0);
   }
 
-  partTwo(): any {}
+  partTwo(): number {
+    const numberDefinitions = gatherNumbers(this.schematic);
+    const gearPositions = findGearPositions(this.schematic);
+    const gearAdjacent: Record<string, number[]> = getGearAdjacent(numberDefinitions, gearPositions);
+
+    const gears = Object.values(gearAdjacent).filter(value => value.length === 2).flatMap(x => x.reduce((acc, curr) => acc * curr));
+
+    return gears.reduce((acc, curr) => {
+      return acc + curr;
+    }, 0);
+  }
 }
 
 function createSchematic(lines: string[]) {
@@ -52,7 +67,7 @@ function gatherNumbers(lines: string[]): NumberDef[] {
 
         if (number) {
           numbers.push({
-            value: lines[row].substring(startIndex, endIndex + 1),
+            value: parseInt(lines[row].substring(startIndex, endIndex + 1)),
             start: startIndex,
             end: endIndex,
             row
@@ -86,11 +101,29 @@ function findPartNumbers(numberDefs: NumberDef[], schematic: string[]) {
     const endDirections = directions(row, end);
 
     if (startDirections.some(x => x === true) || endDirections.some(x => x === true)) {
-      partNumbers.push(parseInt(value));
+      partNumbers.push(value);
     }
   }
 
   return partNumbers;
+}
+
+function findGearPositions(schematic: string[]): GearPosition[] {
+  const positions: GearPosition[] = [];
+
+  for (let row = 0; row < schematic.length; row++) {
+    for (let col = 0; col < schematic[row].length; col++) {
+      const value = schematic[row][col];
+      if (isGear(value)) {
+        positions.push({
+          row,
+          col
+        });
+      }
+    }
+  }
+
+  return positions;
 }
 
 const isSymbolAtPosition = (row: number, col: number, lines: string[]) => {
@@ -107,6 +140,61 @@ const isSymbolAtPosition = (row: number, col: number, lines: string[]) => {
 
 function isGear(value: string) {
   return value === '*';
+}
+
+function getGearAdjacent(numberDefinitions: NumberDef[], gearPositions: GearPosition[]) {
+  let adjacencyMap: Record<string, number[]> = {};
+
+  for (let { row, col } of gearPositions) {
+    numberDefinitions.forEach(({ start, end, row: numberRow, value }) => {
+      if (row - 1 === numberRow && (col === start || col === end)) { // up
+        adjacencyMap = upsertMap(adjacencyMap, `${row}:${col}`, value);
+      }
+
+      if (row + 1 === numberRow && (col === start || col === end)) { // down
+        adjacencyMap = upsertMap(adjacencyMap, `${row}:${col}`, value);
+      }
+
+      if (row === numberRow && (col - 1 === start || col - 1 === end)) { // left
+        adjacencyMap = upsertMap(adjacencyMap, `${row}:${col}`, value);
+      }
+
+      if (row === numberRow && (col + 1 === start || col + 1 === end)) { // right
+        adjacencyMap = upsertMap(adjacencyMap, `${row}:${col}`, value);
+      }
+
+      if (row - 1 === numberRow && (col - 1 === start || col - 1 === end)) { // up-left
+        adjacencyMap = upsertMap(adjacencyMap, `${row}:${col}`, value);
+      }
+
+      if (row - 1 === numberRow && (col + 1 === start || col + 1 === end)) { // up-right
+        adjacencyMap = upsertMap(adjacencyMap, `${row}:${col}`, value);
+      }
+
+      if (row + 1 === numberRow && (col - 1 === start || col - 1 === end)) { // down-left
+        adjacencyMap = upsertMap(adjacencyMap, `${row}:${col}`, value);
+      }
+
+      if (row + 1 === numberRow && (col + 1 === start || col + 1 === end)) { // down-right
+        adjacencyMap = upsertMap(adjacencyMap, `${row}:${col}`, value);
+      }
+    });
+  }
+
+  return adjacencyMap;
+}
+
+function upsertMap(map: Record<string, number[]>, key: string, value: number) {
+  if (map[key]) {
+    if (map[key].includes(value)) {
+      return map;
+    }
+    map[key].push(value);
+  } else {
+    map[key] = [value];
+  }
+
+  return map;
 }
 
 /**
