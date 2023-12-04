@@ -1,4 +1,5 @@
 import { ISolution, Solution } from '../solution';
+import { isNumeric } from '../utils';
 
 const STR_NUMBERS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 
@@ -109,8 +110,4 @@ function getAllIndexArrays(line: string) {
     ...getNumericWordIndices(line),
     ...getNumberIndices(line)
   ];
-}
-
-function isNumeric(char: string) {
-  return char >= '0' && char <= '9';
 }
