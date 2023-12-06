@@ -6,12 +6,12 @@ type Card = {
 }
 
 export class DayFour extends Solution implements ISolution {
-  private cards: Card[];
+  private winningCards: number[][];
 
   constructor() {
     super(4);
-    this.cards = this.lines.map(line => {
-      const [title, values] = line.trim().split(':');
+    const cards = this.lines.map(line => {
+      const [_title, values] = line.trim().split(':');
       const [numbers, winningNumbers] = values.trim().split('|');
 
       return {
@@ -19,14 +19,14 @@ export class DayFour extends Solution implements ISolution {
         winningNumbers: winningNumbers.trim().split(' ').filter(Boolean).map(x => parseInt(x)),
       }
     });
+
+    this.winningCards = cards
+      .map(({ numbers, winningNumbers }) => numbers.filter(number => winningNumbers.includes(number)))
+      .filter(x => x.length > 0);
   }
 
   partOne(): number {
-    const winningCards = this.cards
-      .map(({ numbers, winningNumbers }) => numbers.filter(number => winningNumbers.includes(number)))
-      .filter(x => x.length > 0);
-
-    const cardPoints = winningCards.reduce((points, card) => {
+    const cardPoints = this.winningCards.reduce((points, card) => {
       let p = 1;
       if (card.length === 1) {
         points.push(p);
@@ -42,7 +42,15 @@ export class DayFour extends Solution implements ISolution {
     }, 0);
   }
 
-  partTwo(): any {
+  partTwo(): number {
+    const pile = [];
+
+    this.winningCards.forEach((winningCard, index, array) => {
+      const next = winningCard.length;
+    });
+
+
+    return pile.length;
   }
 
 }
