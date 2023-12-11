@@ -8,7 +8,7 @@ export interface ISolution {
 }
 
 export class Solution {
-  private readonly input: string;
+  protected readonly input: string;
   protected readonly lines: string[];
   private readonly number;
 
