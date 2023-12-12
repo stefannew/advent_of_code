@@ -37,8 +37,6 @@ export class DaySeven extends Solution implements ISolution {
 			return a.type > b.type ? 1 : -1;
 		});
 
-		console.log(sortedReverse);
-
 		return sortedReverse.reduce((acc: number, curr, index) => {
 			return acc + (curr.bid * (index + 1));
 		}, 0);
