@@ -3,11 +3,12 @@ import { DayTwo } from './day-2';
 import { DayThree } from './day-3';
 import { DayFour } from './day-4';
 import { DayFive } from './day-5';
+import { DaySix } from './day-6';
 
-const days = [new DayFive()];
+const days = [new DaySix()];
 
 days.forEach(day => {
   console.log('===================');
-  console.log(`Day ${day.name()}, Part 1`, day.partOne());
-  console.log(`Day ${day.name()}, Part 2`, day.partTwo());
+  console.log(`${day.name()}, Part 1`, day.partOne());
+  console.log(`${day.name()}, Part 2`, day.partTwo());
 });
