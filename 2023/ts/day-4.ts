@@ -1,4 +1,4 @@
-import { ISolution, Solution } from '../solution';
+import { ISolution, Solution } from './solution';
 
 type Card = {
   numbers: number[];

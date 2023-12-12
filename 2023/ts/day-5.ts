@@ -1,4 +1,4 @@
-import { ISolution, Solution } from '../solution';
+import { ISolution, Solution } from './solution';
 
 export class DayFive extends Solution implements ISolution {
 	constructor() {

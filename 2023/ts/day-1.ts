@@ -1,5 +1,5 @@
-import { ISolution, Solution } from '../solution';
-import { isNumeric } from '../utils';
+import { ISolution, Solution } from './solution';
+import { isNumeric } from './utils';
 
 const STR_NUMBERS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 

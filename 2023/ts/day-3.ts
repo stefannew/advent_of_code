@@ -1,5 +1,5 @@
-import { ISolution, Solution } from '../solution';
-import { isNumeric } from '../utils';
+import { ISolution, Solution } from './solution';
+import { isNumeric } from './utils';
 
 type NumberDef = {
   value: number;
