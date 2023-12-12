@@ -4,8 +4,9 @@ import { DayThree } from './day-3';
 import { DayFour } from './day-4';
 import { DayFive } from './day-5';
 import { DaySix } from './day-6';
+import { DaySeven } from './day-7';
 
-const days = [new DaySix()];
+const days = [new DaySeven()];
 
 days.forEach(day => {
   console.log('===================');
