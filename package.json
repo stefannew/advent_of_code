@@ -1,0 +1,23 @@
+{
+  "name": "advent_of_code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "expect": "^29.7.0",
+    "mocha": "^11.0.1",
+    "rc": "^1.2.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "author": "Stefan New",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/rc": "^1.2.4"
+  }
+}
