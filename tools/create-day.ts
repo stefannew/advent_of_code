@@ -36,6 +36,17 @@ describe('Day ${day}', () => {
 
   });
 });
+
+async function setup() {
+  const config = configure();
+
+  const input = \`\`;
+
+  const day = new Day${day}(config, input);
+  await day.initialize();
+
+  return day;
+}
 `;
 
 async function run() {
