@@ -15,10 +15,10 @@ async function run() {
 
   await d.initialize();
 
-  const partOneResult = await d.partOne();
-  const partTwoResult = await d.partTwo();
+  const partOneResult = await d.part1();
+  const partTwoResult = await d.part2();
 
-  console.log(d.name());
+  console.log(`Year: ${year}, Day: ${day}`);
   console.log('----------------------------------------');
   console.log(`Part One: ${partOneResult}`);
   console.log(`Part Two: ${partTwoResult}`);

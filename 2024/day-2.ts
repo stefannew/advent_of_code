@@ -1,12 +1,12 @@
 import { ISolution, Solution } from '../solution';
 import { Config } from '../config';
 
-export default class DayTwo extends Solution implements ISolution {
+export default class Day2 extends Solution implements ISolution {
   constructor(config: Config, override?: string) {
     super(2024, 2, config, override);
   }
 
-  async partOne() {
+  async part1() {
     const safeReports = this.lines
       .map(line => line.split(' ').map(value => parseInt(value)))
       .filter(this.isSafeReport);
@@ -46,7 +46,7 @@ export default class DayTwo extends Solution implements ISolution {
     return { baseReportIndex, reports };
   }
 
-  async partTwo() {
+  async part2() {
     const reportTracker: Record<number, number[][]> = {};
     const reports = this.lines.map(line => line.split(' ').map(value => parseInt(value)));
     const reportsWithSkips = reports.flatMap((report, index) => this.createReportWithSkips(index, report));

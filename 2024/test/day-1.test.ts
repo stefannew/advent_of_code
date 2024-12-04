@@ -1,20 +1,20 @@
 import expect from 'expect';
 
 import { configure } from '../../config';
-import DayOne from '../day-1';
+import Day1 from '../day-1';
 
-describe('Day One', () => {
-  describe('Part One', () => {
+describe('Day 1', () => {
+  describe('Part 1', () => {
     it('returns the correct total distance', async () => {
-      const dayOne = await setup();
-      expect(await dayOne.partOne()).toEqual(11)
+      const day1 = await setup();
+      expect(await day1.part1()).toEqual(11)
     });
   });
 
-  describe('Part Two', () => {
+  describe('Part 2', () => {
     it('returns the correct similarity score', async () => {
-      const dayOne = await setup();
-      expect(await dayOne.partTwo()).toEqual(31)
+      const day1 = await setup();
+      expect(await day1.part2()).toEqual(31)
     });
   });
 });
@@ -29,7 +29,7 @@ async function setup() {
 3   9
 3   3`;
 
-  const day = new DayOne(config, input);
+  const day = new Day1(config, input);
   await day.initialize();
 
   return day;

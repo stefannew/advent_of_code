@@ -1,7 +1,7 @@
 import { ISolution, Solution } from '../solution';
 import { Config } from '../config';
 
-export default class DayOne extends Solution implements ISolution {
+export default class Day1 extends Solution implements ISolution {
   constructor(config: Config, override?: string) {
     super(2024, 1, config, override);
   }
@@ -17,7 +17,7 @@ export default class DayOne extends Solution implements ISolution {
     }, { one: [], two: [] });
   }
 
-  async partOne() {
+  async part1() {
     const lists = this.createLists();
 
     const listOne = lists.one.sort();
@@ -33,7 +33,7 @@ export default class DayOne extends Solution implements ISolution {
     }, 0);
   }
 
-  async partTwo() {
+  async part2() {
     const lists = this.createLists();
 
     const occurrencesListTwo = lists.two.reduce((acc: Record<number, number>, curr) => {

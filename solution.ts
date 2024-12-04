@@ -2,8 +2,8 @@ import { Config } from './config';
 
 
 export interface ISolution {
-  partOne: () => Promise<number | string>;
-  partTwo: () => Promise<number | string>;
+  part1: () => Promise<number | string>;
+  part2: () => Promise<number | string>;
 }
 
 export class Solution {
@@ -21,10 +21,6 @@ export class Solution {
   async initialize() {
     this.input = this.inputOverride ? this.inputOverride : await this.fetchInput();
     this.lines = this.input.split('\n');
-  }
-
-  name() {
-    return `Year: ${this.year}, Day: ${this.day}`;
   }
 
   private async fetchInput() {
