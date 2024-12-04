@@ -1,7 +1,7 @@
 import expect from 'expect';
 
-import { DayOne } from '../day-1';
 import { configure } from '../../config';
+import DayOne from '../day-1';
 
 describe('Day One', () => {
   describe('Part One', () => {
@@ -22,14 +22,14 @@ describe('Day One', () => {
 async function setup() {
   const config = configure();
 
-  const override = `3   4
+  const input = `3   4
 4   3
 2   5
 1   3
 3   9
 3   3`;
 
-  const day = new DayOne(config, override);
+  const day = new DayOne(config, input);
   await day.initialize();
 
   return day;

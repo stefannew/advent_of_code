@@ -1,24 +1,29 @@
-import { DayOne } from './2024/day-1';
 import { configure } from './config';
 
 const config = configure();
 
-const days = [
-  new DayOne(config)
-];
+if (!process.argv[2] || !process.argv[3]) {
+  throw new Error('Invalid arguments. Supply a year and day.');
+}
 
-(async () => {
-  for await (const day of days) {
-    await day.initialize();
+const year = parseInt(process.argv[2]);
+const day = parseInt(process.argv[3]);
 
-    const partOneResult = await day.partOne();
-    const partTwoResult = await day.partTwo();
+async function run() {
+  const file = require(`./${year}/day-${day}.ts`);
+  const d = new file.default(config);
 
-    console.log(day.name());
-    console.log('----------------------------------------');
-    console.log(`Part One: ${partOneResult}`);
-    console.log(`Part Two: ${partTwoResult}`);
-    console.log('----------------------------------------');
-    console.log('\n');
-  }
-})();
+  await d.initialize();
+
+  const partOneResult = await d.partOne();
+  const partTwoResult = await d.partTwo();
+
+  console.log(d.name());
+  console.log('----------------------------------------');
+  console.log(`Part One: ${partOneResult}`);
+  console.log(`Part Two: ${partTwoResult}`);
+  console.log('----------------------------------------');
+  console.log('\n');
+}
+
+void run();

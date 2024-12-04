@@ -1,7 +1,7 @@
 import { ISolution, Solution } from '../solution';
 import { Config } from '../config';
 
-export class DayOne extends Solution implements ISolution {
+export default class DayOne extends Solution implements ISolution {
   constructor(config: Config, override?: string) {
     super(2024, 1, config, override);
   }
